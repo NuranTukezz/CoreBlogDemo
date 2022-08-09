@@ -1,0 +1,33 @@
+﻿<div class="comment-top">
+    <h4>Yorum yapın</h4>
+    <div class="comment-bottom">
+        <form  method="post" asp-action ="PartialAddComment" asp-controller="Comment" >  @*action="/Comment/PartialAddComment/"*@   @*asp-action="PartialAddComment"*@
+            <input class="form-control" type="text" name="CommentUserName" style="color:black" placeholder="Adınız Soyadınız" required="">
+            <input class="form-control" type="text" name="CommentTitle" style="color:black" placeholder="Konu" required="">
+            <textarea class="form-control" name="CommentContent" style="color:black" placeholder="Yorumunuz..." required=""></textarea>
+            <button type="submit"  class="btn btn-primary submit">Yorum Yap</button>  @*id="btnaddcomment"*@
+
+        </form>
+    </div>
+</div>
+@*@section scripts{
+
+    $("#btnaddcomment").click(function (){
+        let writer={
+            Id:$("#txtWriterid").val(),
+            Name:$("#txtWritername").val()
+        };
+
+        $.ajax({
+            type:"post",
+            url:"/Admin/Writer/AddWriter/",
+            data:writer,
+            success:function(func){
+                let result= jQuery.parseJSON(func);
+                alert("Yazar Ekleme İşlemi Başarılı Bir Şekilde Gerçekleşti");
+            }
+        });
+    });
+}
+*@
+
