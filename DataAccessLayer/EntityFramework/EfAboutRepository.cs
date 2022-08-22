@@ -12,9 +12,5 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfAboutRepository : GenericRepository<About>, IAboutDal
     {
-        //public List<About> GetListAll(Expression<Func<About, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

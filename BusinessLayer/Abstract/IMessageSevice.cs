@@ -11,5 +11,6 @@ namespace BusinessLayer.Abstract
     {
         //şartlı mesaj listeleme
         List<Message> GetInboxListByWriter(string p);
+        
     }
 }

@@ -12,9 +12,5 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfWriterRepository : GenericRepository<Writer>, IWriterDal
     {
-        //public List<Writer> GetListAll(Expression<Func<Writer, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

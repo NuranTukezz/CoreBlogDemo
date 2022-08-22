@@ -12,9 +12,5 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfCategoryRepository : GenericRepository<Category>, ICategoryDal
     {
-        //public List<Category> GetListAll(Expression<Func<Category, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

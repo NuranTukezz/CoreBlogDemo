@@ -21,14 +21,14 @@ namespace CoreBlogDemo.Controllers
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
 
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
 
         public IActionResult BlogReadAll(int id)
         {
@@ -42,8 +42,8 @@ namespace CoreBlogDemo.Controllers
 
         public IActionResult BlogListByWriter()
         {
-            var userMail = User.Identity.Name;//aktif kullanıcının name değerini getirir
-
+            var userName = User.Identity.Name;//aktif kullanıcının name değerini getirir
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
 
             var values = bm.GetListWithCategoryByWriterBm(writerId);
@@ -65,8 +65,9 @@ namespace CoreBlogDemo.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
-            var userMail = User.Identity.Name;
-            var writerId = c.Writers.Where((x) => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var userName = User.Identity.Name;//aktif kullanıcının name değerini getirir
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
 
 
             BlogValidator bv = new BlogValidator();
@@ -118,18 +119,19 @@ namespace CoreBlogDemo.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
-            var userMail = User.Identity.Name;
-            var writerId = c.Writers.Where((x) => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var userName = User.Identity.Name;//aktif kullanıcının name değerini getirir
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+
 
 
             p.WriterID = writerId;
-            //p.BlogCreateDate= System.DateTime.Now;
-            // p.BlogStatus = true;
+            p.BlogCreateDate = System.DateTime.Now;//DateTime.Parse(DateTime.Now.ToShortDateString());
+            p.BlogStatus = true;
             bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");
+
         }
-
-
     }
 
 }

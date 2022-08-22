@@ -22,5 +22,6 @@ namespace CoreBlogDemo
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-    }
+
+     }
 }

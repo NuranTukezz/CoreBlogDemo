@@ -13,7 +13,7 @@ namespace CoreBlogDemo.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
+       // [AllowAnonymous]
         public IActionResult AllNotification()
         {
             var values=nm.GetList();

@@ -14,10 +14,6 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfBlogRepository : GenericRepository<Blog> , IBlogDal
     {
-        //public List<Blog> GetListAll(Expression<Func<Blog, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public List<Blog> GetListWithCategory()
         {

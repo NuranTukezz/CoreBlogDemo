@@ -9,7 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IBlogService : IGenericService<Blog>
     {
-        List<Blog> GetBlogListWithCategory();
+        List<Blog> GetBlogListWithCategory();//hem category hem yazarla işlem yapılıyor
         List<Blog> GetBlogListByWriter(int id);
     }
 }

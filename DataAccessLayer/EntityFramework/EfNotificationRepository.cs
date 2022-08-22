@@ -12,9 +12,5 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfNotificationRepository : GenericRepository<Notification>, INotificationDal
     {
-        //public List<Notification> GetListAll(Expression<Func<Notification, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

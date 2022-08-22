@@ -10,9 +10,7 @@ namespace BusinessLayer.Abstract
     public interface ICommentService
     {
         void CommentAdd(Comment comment);
-        // void CategoryDalete(Category category);
-        // void CategoryUpdate(Category category);
-        List<Comment> GetList(int id);
-        // Category GetById(int id);
+        List<Comment> GetList(int id);//Bloga göre değer gelecek
+        List<Comment> GetCommentWithBlog();//yorumları blogla getir
     }
 }

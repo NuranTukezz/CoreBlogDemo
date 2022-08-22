@@ -12,9 +12,5 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFNewsLetterRepository : GenericRepository<NewsLetter>, INewsLetterDal
     {
-        //public List<NewsLetter> GetListAll(Expression<Func<NewsLetter, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

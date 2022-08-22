@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -31,8 +32,14 @@ namespace CoreBlogDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+           
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); //.AddRazorRuntimeCompilation()
+
+
+            services.AddRazorPages().AddRazorRuntimeCompilation(); //Add this line of code
+
 
             services.AddSession();
 
@@ -49,13 +56,6 @@ namespace CoreBlogDemo
             })
 
                 .AddEntityFrameworkStores<Context>();
-
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    options.Password.RequiredLength = 6;
-            //    options.User.RequireUniqueEmail = true;
-            //});
-
 
 
 
@@ -78,7 +78,20 @@ namespace CoreBlogDemo
                 {
                     x.LoginPath = "/Login/Index";
                 }
-                );
+             );
+
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                //Cookie settins
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(100);//100dk otantike olunacak
+                options.AccessDeniedPath = new PathString("/Login/AccessDenied/");  //giriþ engeli olduðu zaman yönlendirme
+                options.LoginPath = "/Login/Index";
+                options.SlidingExpiration = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

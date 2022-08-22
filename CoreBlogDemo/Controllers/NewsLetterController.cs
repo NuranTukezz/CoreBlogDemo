@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreBlogDemo.Controllers
 {
-    [AllowAnonymous]
+   // [AllowAnonymous]
     public class NewsLetterController : Controller
     {
         //mail bültenine abone olmak için oluşturuldu

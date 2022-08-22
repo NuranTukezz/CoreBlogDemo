@@ -1,0 +1,26 @@
+﻿@using CoreBlogDemo.Areas.Admin.Models
+@model List<RoleAssignViewModel>
+@{
+    ViewData["Title"] = "AssignRole";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<form method="post">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-check">
+            <input type="hidden" asp-for="@Model[i].RoleId" />  @*=>FOR DÖNGÜSÜYLE ROLLERİ LİSTELE*@
+            <input type="hidden" asp-for="@Model[i].Name" />
+            <input type="hidden" asp-for="@Model[i].NormalizedName" />
+            <input type="checkbox" asp-for="@Model[i].Exist" class="form-check-input" />  @*=>TRUE OLAN DURUMLARI İŞARETLE*@
+            <label class="form-check-label" for="@Model[i].Exist">@Model[i].Name</label>
+        </div>
+
+    }
+    <br />
+    <button class="btn btn-info">Değşiklikleri Kaydet</button>
+</form>
+<br />
+<a href="/Admin/AdminRole/UserRoleList/" class="btn btn-primary">Kullanıcı Listesine Dön</a>
+
+

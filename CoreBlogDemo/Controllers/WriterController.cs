@@ -61,14 +61,14 @@ namespace CoreBlogDemo.Controllers
         }
 
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
         {
             return PartialView();
         }
 
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
@@ -76,45 +76,42 @@ namespace CoreBlogDemo.Controllers
 
 
         [HttpGet]
-        public IActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            Context c = new Context();
-            var userName = User.Identity.Name;//aktif kullanıcının name değerini getirir
-            var userMail = c.Users.Where(x=>x.UserName==userName).Select(y => y.Email).FirstOrDefault();
-            var id=c.Users.Where(x=>x.Email==userMail).Select(y=>y.Id).FirstOrDefault();
-            var values=userManager.TGetById(id);
-            return View();
+
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel model = new UserUpdateViewModel();
+            model.Mail = values.Email;
+            model.NameSurname = values.NameSurname;
+            model.ImageUrl = values.ImageUrl;
+            model.UserName = values.UserName;
+            return View(model);
         }
         [HttpPost]
-        public IActionResult WriterEditProfile(Writer p)
+        public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel model)
         {
-            WriterValidator wl = new WriterValidator();
-            ValidationResult results = wl.Validate(p);
-            if (results.IsValid)
-            {
-                wm.TUpdate(p);
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+    
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.Email = model.Mail;
+            values.NameSurname = model.NameSurname;
+            values.ImageUrl = model.ImageUrl;
+            values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, model.Password);//=>kullanıcı adını values ten şifreyi modelden alıyoruz
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
+           
+
         }
 
 
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
         [HttpGet]
         public IActionResult WriterAdd()
         {
             return View();
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public IActionResult WriterAdd(AddProfileImage p)
         {
@@ -137,5 +134,7 @@ namespace CoreBlogDemo.Controllers
             wm.TAdd(w);
             return RedirectToAction("Index", "Dashboard");
         }
+
+      
     }
 }

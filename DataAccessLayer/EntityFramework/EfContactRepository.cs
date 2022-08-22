@@ -12,9 +12,5 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfContactRepository : GenericRepository<Contact>, IContactDal
     {
-        //public List<Contact> GetListAll(Expression<Func<Contact, bool>> expression)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

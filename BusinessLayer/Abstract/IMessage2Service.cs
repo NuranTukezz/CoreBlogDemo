@@ -12,5 +12,7 @@ namespace BusinessLayer.Abstract
         //yazara göre veri getirecek
         List<Message2> GetInboxListByWriter(int id);
 
+        List<Message2> GetSendBoxListByWriter(int id);
+
     }
 }

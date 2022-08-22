@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoreBlogDemo.Controllers
 {
-    [AllowAnonymous]
+   // [AllowAnonymous]
     public class RegisterUserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

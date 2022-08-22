@@ -19,7 +19,7 @@ namespace BusinessLayer.Concrate
         }
 
 
-        public List<Blog> GetBlogListWithCategory()
+        public List<Blog> GetBlogListWithCategory()//hem category hem yazarla işlem yapılıyor
         {
             return _blogDal.GetListWithCategory();
         }
