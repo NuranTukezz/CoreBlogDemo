@@ -7,7 +7,7 @@ using System;
 
 namespace CoreBlogDemo.Controllers
 {
-   // [AllowAnonymous]
+    [AllowAnonymous]
     public class ContactController : Controller
     {
         ContactManager cm = new ContactManager(new EfContactRepository());
